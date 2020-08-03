@@ -10,3 +10,6 @@
 <% @flight.passengers.each do |passenger| %>
   <li><%= passenger.name %></li>
 <% end %>
+
+<p>There are <%= @flight.count_minors %> minors on board</p>
+<p>There are <%= @flight.count_adults %> adults on board</p>

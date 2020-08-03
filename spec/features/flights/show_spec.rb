@@ -26,4 +26,25 @@ RSpec.describe "flight show page" do
     expect(page).to have_content("Game")
     expect(page).to have_content("Kendrick")
   end
+
+  it "displays count of minors and adults on flight" do
+    southwest = Airline.create!(name: "Southwest")
+
+    flight = Flight.create!(number: "2345", date: "08/03/20", time: "11:00", departure_city: "Denver", arrival_city: "Los Angeles", airline: southwest)
+
+    passenger_1 = Passenger.create!(name: "Snoop", age: 48)
+    passenger_2 = Passenger.create!(name: "Game", age: 40)
+    passenger_3 = Passenger.create!(name: "Kendrick", age: 33)
+    passenger_4 = Passenger.create!(name: "Roscoe", age: 15)
+    passenger_5 = Passenger.create!(name: "Dwayne", age: 8)
+
+    FlightPassenger.create(flight: flight, passenger: passenger_1)
+    FlightPassenger.create(flight: flight, passenger: passenger_2)
+    FlightPassenger.create(flight: flight, passenger: passenger_3)
+    FlightPassenger.create(flight: flight, passenger: passenger_4)
+    FlightPassenger.create(flight: flight, passenger: passenger_5)
+
+    expect(page).to have_content("There are 2 minors on board this flight")
+    expect(page).to have_content("There are 3 adults on board this flight")
+  end
 end

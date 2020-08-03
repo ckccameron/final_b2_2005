@@ -6,3 +6,9 @@
     <p><%=link_to flight.number, "/flights/#{flight.id}"%></p>
   </section>
 <% end %>
+
+<h3>Add A Flight For <%= @passenger.name %></h3>
+<%= form_tag "/passengers/#{@passenger.id}", method: :post do %>
+  <p><%= label_tag :number, "Flight Number:" %><%= text_field_tag :number %></p>
+  <p><%= submit_tag "Submit" %></p>
+<% end %>
